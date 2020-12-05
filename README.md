@@ -19,6 +19,7 @@
 - python3 run_boh_segmentation.py All Arsenal637 hier level1 50 svm
 - python3 run_eval_pk_windowdiff.py Arsenal637 svm hier level1
 
+
 # Details:
 
 ## I) Preprocessing:
@@ -38,19 +39,20 @@
        --> Command line: python3 run_eval_ML_classifiers.py train test tagset_type classifier class_level
     
        --> Parameters: 
-    		         train         # All or corpus name in  data/train/csv/...
-    		 	 test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
-    		  	 tagset_type   # flat / hier
-    		  	 classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb
-    		  	 class_level   # level1 / level2 / level3 / level12 / level123 (hierarchical 1 + 2 + 3)			 	
+                      - train         # All or corpus name in  data/train/csv/...
+                      - test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
+                      - tagset_type   # flat / hier
+                      - classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb
+                      - class_level   # level1 / level2 / level3 / level12 / level123 (hierarchical 1 + 2 + 3)			 	
 				
-       --> Example:      python3 run_eval_ML_classifiers.py All Arsenal637 hier svm level1
+       --> Example:   python3 run_eval_ML_classifiers.py All Arsenal637 hier svm level1
 
 ### 2) Generation of class' line predictions 	
 	
-       --> Command line: python3 run_gen_predictions_ML_classifiers.py train test tagset_type classifier class_level 	
+       --> Command line: python3 run_gen_predictions_ML_classifiers.py train test tagset_type classifier class_level train_or_not
 
-       --> Parameters:   same as the evaluation script arameters 	
+       --> Parameters:   same as the evaluation script parameters with the additional parameter: train_or_not 
+			 train_or_not # True if training a classifer  
                   	
        --> Example:      python3 run_gen_predictions_ML_classifiers.py All Arsenal637 hier svm level1 True 
 	
@@ -62,16 +64,16 @@
 
     1) Test segmentaion:
 	
-       --> Command line: python3 run_boh_BUCLS_segmentation.py train test tagset_type level relaxation classifier
+       --> Command line: python3 run_boh_segmentation.py train test tagset_type level relaxation classifier
 
        --> Parameters: 
-			 train         # All or corpus name : serves only to load labels (classes per level)
-    		         test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
-			 level         # level1 / level12 / level123 (if  hier) / level1 / level2 / level3 (if flat)
-    		  	 relaxation    # 5 10 50 100 (number of misclassified lines = tolerance factor)
-			 classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / fastText / BERT / BERT* 
-			  	
-       --> Example:      python3 run_boh_BUCLS_segmentation.py All Arsenal637 hier svm 50 level1 True
+                      - train         # All or corpus name : serves only to load labels (classes per level)
+                      - test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
+                      - level         # level1 / level12 / level123 (if  hier) / level1 / level2 / level3 (if flat)
+                      - relaxation    # 5 10 50 100 (number of misclassified lines = tolerance factor)
+                      - classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / fastText / BERT / BERT* 
+ 			  	
+       --> Example:      python3 run_boh_segmentation.py All Arsenal637 hier level1 50 svm
 
 
 ##    III) Evaluation
@@ -79,9 +81,10 @@
        --> Command line: python3 run_eval_pk_windowdiff.py test classifier tagset_type level
 
        --> Parameters: 
-    		         test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
-    		  	 level         # level1 / level12 / level123 (if  hier) / level1 / level2 / level3 (if flat)
-    		  	 
-			 classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / fastText / BERT / BERT*
-       --> Example:	 python3 run_eval_pk_windowdiff.py Arsenal637 svm hier level1 
-
+                      - test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
+                      - classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / BERT / BERT*       		  	 
+                      - tagset_type   # flat / hier
+                      - level         # level1 / level12 / level123 (if  hier) / level1 / level2 / level3 (if flat)
+       ```
+       --> Example:   python3 run_eval_pk_windowdiff.py Arsenal637 svm hier level1
+       ```
