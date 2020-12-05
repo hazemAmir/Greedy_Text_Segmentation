@@ -12,15 +12,13 @@
 
 ## Quick run
 
-### Segmentation of the  Arsenal 637 book of hours using SVM classifier:
+### Segmentation of the Arsenal 637 book of hours using SVM classifier
 
 - python3 run_preprocessing.py
 - python3 run_gen_predictions_ML_classifiers.py All Arsenal637 hier svm level1 True
 - python3 run_boh_segmentation.py All Arsenal637 hier level1 50 svm
 - python3 run_eval_pk_windowdiff.py Arsenal637 svm hier level1
 
-
-# Details:
 
 ## I) Preprocessing:
     --------------
@@ -32,7 +30,7 @@
     --> Command line:  python3 run_preprocessing.py
 
 ## II) Classification:
-    ---------------
+
     		
 ###    1) Evaluation can be done using the "run_eval_ML_classifiers.py" script  	
         
@@ -58,9 +56,8 @@
 	
 
 ## II) Segmentation:
-    -------------
 
-###    II-1 SVM classifier:
+###    II-1) SVM classifier:
 
     1) Test segmentaion:
 	
@@ -74,8 +71,9 @@
                       - classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / fastText / BERT / BERT* 
  			  	
        --> Example:      python3 run_boh_segmentation.py All Arsenal637 hier level1 50 svm
-
-
+       
+      II-1) BERT classifier:
+            coming soon
 ##    III) Evaluation
 
        --> Command line: python3 run_eval_pk_windowdiff.py test classifier tagset_type level
@@ -85,6 +83,6 @@
                       - classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / BERT / BERT*       		  	 
                       - tagset_type   # flat / hier
                       - level         # level1 / level12 / level123 (if  hier) / level1 / level2 / level3 (if flat)
-       ```
+
        --> Example:   python3 run_eval_pk_windowdiff.py Arsenal637 svm hier level1
-       ```
+       
