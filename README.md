@@ -10,11 +10,78 @@
 - source ENV/bin/activate 
 - pip3 install -r requirements.txt
 
-# Quick run
+## Quick run
 
-## Segmentation of the  Arsenal 637 bokk of hours using SVM classifier:
+### Segmentation of the  Arsenal 637 book of hours using SVM classifier:
 
 - python3 run_preprocessing.py
 - python3 run_gen_predictions_ML_classifiers.py All Arsenal637 hier svm level1 True
 - python3 run_boh_segmentation.py All Arsenal637 hier level1 50 svm
 - python3 run_eval_pk_windowdiff.py Arsenal637 svm hier level1
+
+# Details:
+
+## I) Preprocessing:
+    --------------
+    - Generates train/test files for both line classification and text segmentation
+    - Training texts should be put in "../data/train/raw/" and test files in "../data/test/raw/"
+    - Outputs are generated as flat or hierarchical tag sets in "../data/train/csv/hier/" and "../data/train/csv/flat/" for training.
+    - Similarily, test files are generated in "../data/test/csv/hier/" and "../data/test/csv/flat/" for testing.
+	
+    --> Command line:  python3 run_preprocessing.py
+
+## II) Classification:
+    ---------------
+    		
+###    1) Evaluation can be done using the "run_eval_ML_classifiers.py" script  	
+        
+       --> Command line: python3 run_eval_ML_classifiers.py train test tagset_type classifier class_level
+    
+       --> Parameters: 
+    		         train         # All or corpus name in  data/train/csv/...
+    		 	 test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
+    		  	 tagset_type   # flat / hier
+    		  	 classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb
+    		  	 class_level   # level1 / level2 / level3 / level12 / level123 (hierarchical 1 + 2 + 3)			 	
+				
+       --> Example:      python3 run_eval_ML_classifiers.py All Arsenal637 hier svm level1
+
+### 2) Generation of class' line predictions 	
+	
+       --> Command line: python3 run_gen_predictions_ML_classifiers.py train test tagset_type classifier class_level 	
+
+       --> Parameters:   same as the evaluation script arameters 	
+                  	
+       --> Example:      python3 run_gen_predictions_ML_classifiers.py All Arsenal637 hier svm level1 True 
+	
+
+## II) Segmentation:
+    -------------
+
+###    II-1 SVM classifier:
+
+    1) Test segmentaion:
+	
+       --> Command line: python3 run_boh_BUCLS_segmentation.py train test tagset_type level relaxation classifier
+
+       --> Parameters: 
+			 train         # All or corpus name : serves only to load labels (classes per level)
+    		         test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
+			 level         # level1 / level12 / level123 (if  hier) / level1 / level2 / level3 (if flat)
+    		  	 relaxation    # 5 10 50 100 (number of misclassified lines = tolerance factor)
+			 classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / fastText / BERT / BERT* 
+			  	
+       --> Example:      python3 run_boh_BUCLS_segmentation.py All Arsenal637 hier svm 50 level1 True
+
+
+##    III) Evaluation
+
+       --> Command line: python3 run_eval_pk_windowdiff.py test classifier tagset_type level
+
+       --> Parameters: 
+    		         test          # Arsenal637 / Beaune055 / Caen273 / Zurich169
+    		  	 level         # level1 / level12 / level123 (if  hier) / level1 / level2 / level3 (if flat)
+    		  	 
+			 classifier    # svm / logit / gnb / rf / dt / ada / mlp / xgb / fastText / BERT / BERT*
+       --> Example:	 python3 run_eval_pk_windowdiff.py Arsenal637 svm hier level1 
+
