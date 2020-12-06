@@ -1,4 +1,25 @@
 # Greedy_Text_Segmentation
+
+When citing **The Greedy Text Segmentation approach** in academic papers and theses, please use the following BibTeX entry:
+```
+@inproceedings{hazem-etal-2020-hierarchical,
+    title = "Hierarchical Text Segmentation for Medieval Manuscripts",
+    author = "Hazem, Amir  and
+      Daille, Beatrice  and
+      Stutzmann, Dominique  and
+      Chevalier, Louis and
+      Kermorvant, Christopher"
+    booktitle = "Proceedings of the 28th International Conference on Computational Linguistics",
+    month = dec,
+    year = "2020",
+    address = "Barcelona, Spain (Online)",
+    publisher = "International Committee on Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.coling-main.549",
+    pages = "6240--6251"
+}
+```
+
+
 # Requirements:
 - python3.5
   see requirements.txt file
